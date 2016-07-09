@@ -16,8 +16,8 @@ dependencies {
 Usage
 -----
 The key components are:
-- SwapEditText, Loads the fragments
-- FrameLayout, An empty layout for holding the fragments (Anchored at the bottom for expected results)
+- SwapEditText: Loads the fragments
+- FrameLayout: An empty layout for holding the fragments (Anchored at the bottom for expected results)
 - Lastly, any buttons or views to trigger the switching of fragments
 
 ```xml

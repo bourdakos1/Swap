@@ -3,7 +3,7 @@ Swap
 
 An EditText with the ability to swap the keyboard with custom fragments
 
-![](screenshot.png =100x29)
+![](screenshot.png){:height="36px" width="36px"}
 
 Where to Download
 -----------------

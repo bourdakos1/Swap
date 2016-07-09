@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         // Hide the camera fragment if the device has no camera
         mCameraAttachments.setVisibility(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY) ? View.VISIBLE : View.GONE);
 

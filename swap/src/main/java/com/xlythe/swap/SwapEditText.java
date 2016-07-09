@@ -105,7 +105,9 @@ public class SwapEditText extends EditText {
     }
 
     public void showKeyboard(){
-        mListener.onFragmentHidden();
+        if (mListener != null) {
+            mListener.onFragmentHidden();
+        }
         if (!mAdjustNothing) {
             hideFragment();
         } else {
@@ -118,7 +120,9 @@ public class SwapEditText extends EditText {
     }
 
     private void hideFragment() {
-        mListener.onFragmentHidden();
+        if (mListener != null) {
+            mListener.onFragmentHidden();
+        }
         Fragment activeFragment = mContext.getSupportFragmentManager().findFragmentById(mAttachView.getId());
         if (activeFragment != null) {
             mContext.getSupportFragmentManager().beginTransaction().remove(activeFragment).commit();

@@ -13,8 +13,32 @@ dependencies {
 }
 ```
 
-Getting Started
----------------
+Usage
+-----
+The key components are:
+- SwapEditText, which is what loads the fragments
+- FrameLayout, which is an empty view that holds the fragment this view should be anchored at the bottom for expected results
+- Lastly, any buttons or views to trigger the switching of fragments
+
+```xml
+<com.xlythe.swap.SwapEditText
+    android:id="@+id/edit_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+    
+<Button
+    android:id="@+id/button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+        
+<!-- The default id is "container" this can be changed with setContainer(int id) -->
+<FrameLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"/>
+```
+
+Most of the work for the keyboard is done for you. When tapping on the EditText the default keyboard is launched. You can swap out the default keyboard for any fragment of your choosing using showFragment(Fragment fragment). The library does all the measuring to match the fragment size to the size of the keyboard enabling smooth transitioning.
 ```java
 public class MainActivity extends AppCompatActivity {
     SwapEditText mEditText;
@@ -23,9 +47,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
         mEditText = (SwapEditText) findViewById(R.id.edit_text);
+        
+        // Swap in the fragment when the button is tapped
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            onClick(View view) {
+                mEditText.showFragment(DummyFragment.newInstance())
+            }
+        });
+        
     }
 
+    // Override onBackPressed in order to hide the keyboard when tapping back instead of closing the activity
     @Override
     public void onBackPressed() {
         if (mEditText.getFragmentVisibility()) {
@@ -35,20 +71,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-```
-
-Getting Started
----------------
-```xml
-<com.xlythe.swap.SwapEditText
-    android:id="@+id/edit_text"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
-        
-<FrameLayout
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
 ```
 
 License

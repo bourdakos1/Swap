@@ -10,8 +10,8 @@ ext {
 
     libraryDescription = ''
 
-    siteUrl = 'https://github.com/Bourdakos1/Swap'
-    gitUrl = 'https://github.com/Bourdakos1/Swap.git'
+    siteUrl = 'https://github.com/bourdakos1/Swap'
+    gitUrl = 'https://github.com/bourdakos1/Swap.git'
 
     libraryVersion = '0.0.1'
 

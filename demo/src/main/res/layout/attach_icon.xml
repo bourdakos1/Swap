@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
-    <com.xlythe.sms.view.SquareImageView
+    <com.xlythe.demo.SquareImageView
         android:id="@+id/image"
         android:scaleType="centerCrop"
         android:layout_gravity="center"

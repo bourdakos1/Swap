@@ -38,7 +38,7 @@ The key components are:
     android:layout_height="wrap_content"/>
 ```
 
-Most of the work for the keyboard is done for you. When tapping on the EditText the default keyboard is launched. You can swap out the default keyboard for any fragment of your choosing using showFragment(Fragment fragment). The library does all the measuring to match the fragment size to the size of the keyboard enabling smooth transitioning.
+Most of the work for the keyboard is done for you. When tapping on the EditText the default keyboard is launched. You can swap out the default keyboard for any fragment of your choosing using showFragment(Fragment fragment). The library does all the measuring to match the fragment size to the size of the keyboard, enabling smooth transitioning.
 ```java
 public class MainActivity extends AppCompatActivity {
     SwapEditText mEditText;

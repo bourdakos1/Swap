@@ -123,11 +123,13 @@ public class SwapEditText extends EditText {
         if (mListener != null) {
             mListener.onFragmentHidden();
         }
-        Fragment activeFragment = mContext.getSupportFragmentManager().findFragmentById(mAttachView.getId());
-        if (activeFragment != null) {
-            mContext.getSupportFragmentManager().beginTransaction().remove(activeFragment).commit();
+        if (mAttachView != null) {
+            Fragment activeFragment = mContext.getSupportFragmentManager().findFragmentById(mAttachView.getId());
+            if (activeFragment != null) {
+                mContext.getSupportFragmentManager().beginTransaction().remove(activeFragment).commit();
+            }
+            mAttachView.setVisibility(View.GONE);
         }
-        mAttachView.setVisibility(View.GONE);
     }
 
     public void hideKeyboard() {
@@ -137,7 +139,8 @@ public class SwapEditText extends EditText {
 
     public void setContainer(int id){
         mAttachView = mContext.findViewById(id);
-        mAttachView.getLayoutParams().height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, (int) 263.3333, getResources().getDisplayMetrics());
+        mAttachView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.keyboard_height);
+        // No need to call requestLayout(), because it will be drawn when it is set to "Visible"
         mAttachView.setVisibility(GONE);
     }
 

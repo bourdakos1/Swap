@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Swap.iml" filepath="$PROJECT_DIR$/Swap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Swap.iml" filepath="$PROJECT_DIR$/Swap.iml" />
       <module fileurl="file://$PROJECT_DIR$/swap/app.iml" filepath="$PROJECT_DIR$/swap/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swap/swap.iml" filepath="$PROJECT_DIR$/swap/swap.iml" />
       <module fileurl="file://$PROJECT_DIR$/swap/swap.iml" filepath="$PROJECT_DIR$/swap/swap.iml" />
     </modules>
   </component>

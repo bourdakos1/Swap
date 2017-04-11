@@ -51,6 +51,7 @@ public class SwapEditText extends AppCompatEditText {
         // but it seems that the input gets reset to a default on keyboard dismissal if not set otherwise.
         rootWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
             public void onGlobalLayout() {
                 if (mAttachView == null) {
                     setContainer(R.id.container);

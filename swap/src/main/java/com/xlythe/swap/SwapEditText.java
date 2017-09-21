@@ -92,7 +92,9 @@ public class SwapEditText extends AppCompatEditText {
         }
     }
 
-    public void showFragment(Fragment fragment){
+    public void showFragment(Fragment fragment) {
+        if (mAttachView == null) return;
+
         clearFocus();
         mAttachView.setVisibility(View.VISIBLE);
 
@@ -100,13 +102,13 @@ public class SwapEditText extends AppCompatEditText {
         transaction.replace(mAttachView.getId(), fragment).commitAllowingStateLoss();
     }
 
-    public void showKeyboard(){
+    public void showKeyboard() {
         if (mListener != null) {
             mListener.onFragmentHidden();
         }
         if (!mAdjustNothing) {
             hideFragment();
-        } else {
+        } else if (mAttachView != null) {
             // Just because it has focus doesnt mean the keyboard actually opened
             // This seems like an easier fix than not showing the attachview
             InputMethodManager mgr = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -133,7 +135,7 @@ public class SwapEditText extends AppCompatEditText {
         hideFragment();
     }
 
-    public void setContainer(int id){
+    public void setContainer(int id) {
         mAttachView = mContext.findViewById(id);
         mAttachView.getLayoutParams().height = (int) getResources().getDimension(R.dimen.keyboard_height);
         // No need to call requestLayout(), because it will be drawn when it is set to "Visible"
@@ -141,7 +143,7 @@ public class SwapEditText extends AppCompatEditText {
     }
 
     public boolean getFragmentVisibility() {
-        return mAttachView.getVisibility() == View.VISIBLE;
+        return mAttachView == null ? false : mAttachView.getVisibility() == View.VISIBLE;
     }
 
     public boolean getKeyboardVisibility() {

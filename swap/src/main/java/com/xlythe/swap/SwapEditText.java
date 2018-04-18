@@ -143,7 +143,7 @@ public class SwapEditText extends AppCompatEditText {
     }
 
     public boolean getFragmentVisibility() {
-        return mAttachView == null ? false : mAttachView.getVisibility() == View.VISIBLE;
+        return mAttachView != null && mAttachView.getVisibility() == View.VISIBLE;
     }
 
     public boolean getKeyboardVisibility() {

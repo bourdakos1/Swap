@@ -6,12 +6,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.xlythe.demo.PermissionUtils.hasPermissions;
 
@@ -33,7 +35,7 @@ public class GalleryFragment extends Fragment {
     private View mPermissionPrompt;
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CODE_REQUIRED_PERMISSIONS) {
             if (hasPermissions(getContext(), REQUIRED_PERMISSIONS)) {
                 showGallery();
@@ -44,19 +46,16 @@ public class GalleryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        mAttachments = (RecyclerView) rootView.findViewById(R.id.attachments);
+        mAttachments = rootView.findViewById(R.id.attachments);
         mAttachments.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         mAttachments.addItemDecoration(new GalleryItemDecoration(getResources().getDrawable(R.drawable.divider_attach)));
 
-        mPermissionPrompt = rootView.findViewById(R.id.permission_error);
-        mPermissionPrompt.findViewById(R.id.request_permissions).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS);
-            }
+        mPermissionPrompt = rootView.findViewById(R.id.layout_permissions);
+        mPermissionPrompt.findViewById(R.id.request_permissions).setOnClickListener(v -> {
+            requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS);
         });
 
         return rootView;

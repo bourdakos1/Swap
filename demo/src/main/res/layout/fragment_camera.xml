@@ -3,30 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <FrameLayout
-        android:id="@+id/layout_camera"
+        android:id="@id/layout_camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000">
-        <com.xlythe.demo.camera.CameraView
-            android:id="@+id/camera"
+        <com.xlythe.view.camera.CameraView
+            android:id="@id/camera"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <ProgressBar
-            android:id="@+id/seek"
+            android:id="@id/progress"
             android:progressDrawable="@drawable/progress_record"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             style="@android:style/Widget.ProgressBar.Horizontal"/>
         <ImageView
-            android:id="@+id/btn_capture"
+            android:id="@id/capture"
             android:src="@drawable/btn_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="8dp" />
-        <ImageView
-            android:id="@+id/btn_toggle_camera"
+        <CheckBox
+            android:id="@id/toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
@@ -35,7 +35,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"/>
         <TextView
-            android:id="@+id/duration"
+            android:id="@id/duration"
             android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

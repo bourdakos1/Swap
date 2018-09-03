@@ -2,16 +2,18 @@ package com.xlythe.demo;
 
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.xlythe.swap.SwapEditText;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     private SwapEditText mEditText;
@@ -23,31 +25,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mEditText = (SwapEditText) findViewById(R.id.edit_text);
-        mGalleryAttachments = (ImageView) findViewById(R.id.gallery);
-        mCameraAttachments = (ImageView) findViewById(R.id.camera);
-        mStickerAttachments = (ImageView) findViewById(R.id.sticker);
+        mEditText = findViewById(R.id.edit_text);
+        mGalleryAttachments = findViewById(R.id.gallery);
+        mCameraAttachments = findViewById(R.id.camera);
+        mStickerAttachments = findViewById(R.id.sticker);
 
         // Clear button selection when keyboard is dismissed
-        mEditText.setOnFragmentHiddenListener(new SwapEditText.OnFragmentHiddenListener() {
-            @Override
-            public void onFragmentHidden() {
-                clearAttachmentSelection();
-            }
-        });
+        mEditText.setOnFragmentHiddenListener(this::clearAttachmentSelection);
 
-        mEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        mEditText.setOnClickListener(v -> {});
 
         // Hide the camera fragment if the device has no camera
         mCameraAttachments.setVisibility(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY) ? View.VISIBLE : View.GONE);
 
         // Set up recycler view
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
+        RecyclerView recyclerView = findViewById(R.id.list);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
@@ -64,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         // Dismiss keyboard when scrolling
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState > 0) {
                     mEditText.hideKeyboard();

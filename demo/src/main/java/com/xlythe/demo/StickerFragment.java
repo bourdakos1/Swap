@@ -2,13 +2,14 @@ package com.xlythe.demo;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class StickerFragment extends Fragment {
     private static final String TAG = StickerFragment.class.getSimpleName();
@@ -22,7 +23,7 @@ public class StickerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_sticker, container, false);
-        RecyclerView gridView = (RecyclerView) rootView.findViewById(R.id.content);
+        RecyclerView gridView = rootView.findViewById(R.id.content);
         gridView.setAdapter(new StickerAdapter(getContext()));
         gridView.setLayoutManager(new GridAutofitLayoutManager(getContext()));
         return rootView;
@@ -65,7 +66,7 @@ public class StickerFragment extends Fragment {
 
             if (mColumnWidthChanged && mColumnWidth > 0) {
                 int totalSpace;
-                if (getOrientation() == VERTICAL) {
+                if (getOrientation() == RecyclerView.VERTICAL) {
                     totalSpace = getWidth() - getPaddingRight() - getPaddingLeft();
                 } else {
                     totalSpace = getHeight() - getPaddingTop() - getPaddingBottom();

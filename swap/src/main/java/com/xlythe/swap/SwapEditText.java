@@ -2,10 +2,6 @@ package com.xlythe.swap;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,6 +9,11 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 public class SwapEditText extends AppCompatEditText {
     private FragmentActivity mContext;

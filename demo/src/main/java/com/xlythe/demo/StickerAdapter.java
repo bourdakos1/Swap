@@ -1,11 +1,12 @@
 package com.xlythe.demo;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
     private static final Sticker[] STICKERS = {
@@ -64,7 +65,7 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHold
 
         public ViewHolder(View view) {
             super(view);
-            mImage = (ImageView) view.findViewById(R.id.image);
+            mImage = view.findViewById(R.id.image);
         }
 
         void setSticker(Sticker sticker) {

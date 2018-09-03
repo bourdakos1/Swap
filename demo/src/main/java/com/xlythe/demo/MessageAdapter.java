@@ -1,9 +1,7 @@
 package com.xlythe.demo;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +11,9 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
     private static final String TAG = MessageAdapter.class.getSimpleName();
@@ -90,13 +91,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     public static class ViewHolder extends MessageViewHolder {
-        public TextView mTextView;
-        public FrameLayout mFrame;
+        TextView mTextView;
+        FrameLayout mFrame;
 
         public ViewHolder(View v, ClickListener listener) {
             super(v, listener);
-            mFrame = (FrameLayout) v.findViewById(R.id.frame);
-            mTextView = (TextView) v.findViewById(R.id.message);
+            mFrame = v.findViewById(R.id.frame);
+            mTextView = v.findViewById(R.id.message);
         }
 
         public void setMessage(Context context, Message message) {
@@ -119,7 +120,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         public LeftViewHolder(View v, ClickListener listener) {
             super(v, listener);
-            mFrame = (FrameLayout) v.findViewById(R.id.frame);
+            mFrame = v.findViewById(R.id.frame);
         }
 
         @Override
@@ -143,8 +144,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(mContext).inflate(LAYOUT_MAP.get(viewType), parent, false);
         switch(viewType) {
             case TYPE_TOP_RIGHT:
@@ -158,7 +160,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             case TYPE_SINGLE_LEFT:
                 return new LeftViewHolder(layout, mClickListener);
             default:
-                return null;
+                throw new IllegalStateException();
         }
     }
 
@@ -226,7 +228,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     @Override
-    public void onBindViewHolder(MessageViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         holder.setMessage(mContext, getMessage(position));
     }
 

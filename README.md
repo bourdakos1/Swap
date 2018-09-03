@@ -9,7 +9,7 @@ Where to Download
 -----------------
 ```groovy
 dependencies {
-  compile 'com.xlythe:swap:1.0.0'
+  implementation 'com.xlythe:swap:1.0.1'
 }
 ```
 

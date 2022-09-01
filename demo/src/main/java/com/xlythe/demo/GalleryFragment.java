@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -19,14 +20,25 @@ import static com.xlythe.demo.PermissionUtils.hasPermissions;
 
 public class GalleryFragment extends Fragment {
 
-    private static final String[] REQUIRED_PERMISSIONS = {
-            Manifest.permission.READ_EXTERNAL_STORAGE
-    };
+    private static final String[] REQUIRED_PERMISSIONS;
+
+    static {
+        if (Build.VERSION.SDK_INT >= 33) {
+            REQUIRED_PERMISSIONS = new String[] {
+                    Manifest.permission.READ_MEDIA_IMAGES,
+                    Manifest.permission.READ_MEDIA_VIDEO,
+            };
+        } else {
+            REQUIRED_PERMISSIONS = new String[] {
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+            };
+        }
+    }
+
     private static final int REQUEST_CODE_REQUIRED_PERMISSIONS = 2;
 
     public static GalleryFragment newInstance() {
-        GalleryFragment fragment = new GalleryFragment();
-        return fragment;
+        return new GalleryFragment();
     }
 
     private Cursor mCursor;
@@ -54,9 +66,7 @@ public class GalleryFragment extends Fragment {
         mAttachments.addItemDecoration(new GalleryItemDecoration(getResources().getDrawable(R.drawable.divider_attach)));
 
         mPermissionPrompt = rootView.findViewById(R.id.layout_permissions);
-        mPermissionPrompt.findViewById(R.id.request_permissions).setOnClickListener(v -> {
-            requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS);
-        });
+        mPermissionPrompt.findViewById(R.id.request_permissions).setOnClickListener(v -> requestPermissions(REQUIRED_PERMISSIONS, REQUEST_CODE_REQUIRED_PERMISSIONS));
 
         return rootView;
     }

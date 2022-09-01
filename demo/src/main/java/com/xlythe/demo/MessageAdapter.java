@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,14 +44,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         LAYOUT_MAP.put(TYPE_SINGLE_LEFT, R.layout.left_single);
     }
 
-    private ArrayList<Message> mMessages;
-    private Context mContext;
+    private final List<Message> mMessages;
+    private final Context mContext;
     private MessageViewHolder.ClickListener mClickListener;
 
     public static abstract class MessageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private Message mText;
         private Context mContext;
-        private ClickListener mListener;
+        private final ClickListener mListener;
 
         public MessageViewHolder(View v, ClickListener listener) {
             super(v);

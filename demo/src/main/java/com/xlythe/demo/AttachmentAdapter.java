@@ -1,5 +1,6 @@
 package com.xlythe.demo;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
@@ -17,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.ViewHolder> {
 
-    private Context mContext;
-    private Cursor mCursor;
+    private final Context mContext;
+    private final Cursor mCursor;
 
     public AttachmentAdapter(Context context, Cursor cursor) {
         mContext = context;
@@ -26,8 +27,8 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView mImage;
-        private Context mContext;
+        private final ImageView mImage;
+        private final Context mContext;
 
         public ViewHolder(View view, Context context) {
             super(view);
@@ -35,6 +36,7 @@ public class AttachmentAdapter extends RecyclerView.Adapter<AttachmentAdapter.Vi
             mImage = view.findViewById(R.id.image);
         }
 
+        @SuppressLint("RestrictedApi")
         public void setCursor(Cursor cursor){
             String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Thumbnails.DATA));
             Image.with(mContext)

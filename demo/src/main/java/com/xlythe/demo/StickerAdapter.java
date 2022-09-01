@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHolder> {
@@ -38,14 +39,15 @@ public class StickerAdapter extends RecyclerView.Adapter<StickerAdapter.ViewHold
             new Sticker(R.drawable.thumb_unmotivated)
     };
 
-    private Context mContext;
+    private final Context mContext;
 
     public StickerAdapter(Context context) {
         mContext = context;
     }
 
+    @NonNull
     @Override
-    public StickerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StickerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(mContext).inflate(R.layout.grid_item_sticker, parent, false);
         return new ViewHolder(layout);
     }

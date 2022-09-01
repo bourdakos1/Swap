@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -51,26 +50,23 @@ public class SwapEditText extends AppCompatEditText {
         // Seems redundant to set as ADJUST_NOTHING in manifest and then immediately to ADJUST_RESIZE
         // but it seems that the input gets reset to a default on keyboard dismissal if not set otherwise.
         rootWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        root.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if (mAttachView == null) {
-                    setContainer(R.id.container);
+        root.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            if (mAttachView == null) {
+                setContainer(R.id.container);
+            }
+            Rect r = new Rect();
+            View view = rootWindow.getDecorView();
+            view.getWindowVisibleDisplayFrame(r);
+            if (mScreenSize != 0 && mScreenSize > r.bottom) {
+                mKeyboardSize = mScreenSize - r.bottom;
+                mAttachView.getLayoutParams().height = mKeyboardSize;
+                rootWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+                if (mKeyboardOpen) {
+                    mAttachView.setVisibility(View.VISIBLE);
                 }
-                Rect r = new Rect();
-                View view = rootWindow.getDecorView();
-                view.getWindowVisibleDisplayFrame(r);
-                if (mScreenSize != 0 && mScreenSize > r.bottom) {
-                    mKeyboardSize = mScreenSize - r.bottom;
-                    mAttachView.getLayoutParams().height = mKeyboardSize;
-                    rootWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-                    if (mKeyboardOpen) {
-                        mAttachView.setVisibility(View.VISIBLE);
-                    }
-                    mAdjustNothing = true;
-                } else {
-                    mScreenSize = r.bottom;
-                }
+                mAdjustNothing = true;
+            } else {
+                mScreenSize = r.bottom;
             }
         });
     }

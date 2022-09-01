@@ -1,8 +1,5 @@
 package com.xlythe.demo;
 
-import android.content.Context;
-import android.net.Uri;
-
 public class Sticker {
     private final int mThumbnailResId;
 
